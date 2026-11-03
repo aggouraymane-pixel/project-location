@@ -133,3 +133,27 @@ nav a:hover {
         flex-direction: column;
     }
 }
+.car-details {
+    max-width: 850px;
+    margin: 60px auto;
+    padding: 40px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 15px;
+}
+
+.car-details h1 {
+    font-size: 36px;
+    color: #1e3a8a;
+    margin-bottom: 25px;
+}
+
+.car-details p {
+    font-size: 17px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.car-details .btn {
+    margin-top: 15px;
+}

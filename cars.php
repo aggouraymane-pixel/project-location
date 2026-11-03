@@ -118,44 +118,46 @@ $cars = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </form>
 
     <div class="cars-container">
+<?php foreach ($cars as $car): ?>
 
-        <?php foreach ($cars as $car): ?>
+    <div class="car-card">
 
-            <div class="car-card">
+        <h2>
+            <?= htmlspecialchars($car["brand"]) ?>
+            <?= htmlspecialchars($car["model"]) ?>
+        </h2>
 
-                <h2>
-                    <?= htmlspecialchars($car["brand"]) ?>
-                    <?= htmlspecialchars($car["model"]) ?>
-                </h2>
+        <p>
+            Category:
+            <?= htmlspecialchars($car["category_name"]) ?>
+        </p>
 
-                <p>
-                    Category:
-                    <?= htmlspecialchars($car["category_name"]) ?>
-                </p>
+        <p>Year: <?= (int)$car["year"] ?></p>
 
-                <p>
-                    Year:
-                    <?= $car["year"] ?>
-                </p>
+        <p>
+            <?= htmlspecialchars($car["description"] ?? "") ?>
+        </p>
 
-                <p>
-                    <?= htmlspecialchars($car["description"]) ?>
-                </p>
+        <p>
+            <strong>
+                <?= htmlspecialchars($car["price_per_day"]) ?> DH / day
+            </strong>
+        </p>
 
-                <p>
-                    <strong>
-                        <?= $car["price_per_day"] ?> DH / day
-                    </strong>
-                </p>
+        <p>
+            Status:
+            <?= htmlspecialchars($car["status"]) ?>
+        </p>
 
-                <p>
-                    Status:
-                    <?= htmlspecialchars($car["status"]) ?>
-                </p>
+        <!-- Button to open car details -->
+        <a href="car-details.php?id=<?= (int)$car["id"] ?>"
+           class="btn">
+            View Details
+        </a>
 
-            </div>
+    </div>
 
-        <?php endforeach; ?>
+<?php endforeach; ?>
 
     </div>
 
