@@ -58,7 +58,7 @@ require_once "config/database.php";
         Simple, fast and secure car rental.
     </p>
 
-    <a href="#" class="btn">
+  <a href="cars.php" class="btn">
         Explore Cars
     </a>
 

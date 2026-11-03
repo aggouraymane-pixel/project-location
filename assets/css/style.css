@@ -68,4 +68,68 @@ nav a:hover {
 
 .btn:hover {
     background-color: #172554;
+}.cars-section {
+    padding: 60px 8%;
+}
+
+.cars-section h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.cars-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.car-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 25px;
+    background-color: white;
+}
+
+.car-card h2 {
+    color: #1e3a8a;
+    margin-bottom: 15px;
+}
+
+.car-card p {
+    margin-bottom: 10px;
+}
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.filter-form input,
+.filter-form select {
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.filter-form button {
+    border: none;
+    cursor: pointer;
+}
+
+.filter-form a {
+    align-self: center;
+    color: #1e3a8a;
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .cars-container {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-form {
+        flex-direction: column;
+    }
 }
