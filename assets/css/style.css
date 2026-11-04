@@ -157,3 +157,10 @@ nav a:hover {
 .car-details .btn {
     margin-top: 15px;
 }
+.car-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}

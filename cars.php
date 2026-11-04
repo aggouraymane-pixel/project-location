@@ -1,3 +1,4 @@
+
 <?php
 
 session_start();
@@ -58,9 +59,10 @@ $cars = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <title>Our Cars</title>
+    <title>Our Cars - CarRental</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -74,90 +76,135 @@ $cars = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <nav>
         <a href="index.php">Home</a>
         <a href="cars.php">Cars</a>
+
+        <?php if (isset($_SESSION["user_id"])): ?>
+            <a href="logout.php">Logout</a>
+        <?php else: ?>
+            <a href="login.php">Login</a>
+        <?php endif; ?>
     </nav>
 
 </header>
 
-
 <section class="cars-section">
 
     <h1>Our Cars</h1>
+
+    <!-- Search and filter form -->
     <form method="GET" class="filter-form">
 
-    <input
-        type="text"
-        name="search"
-        placeholder="Search brand or model"
-        value="<?= htmlspecialchars($search) ?>"
-    >
+        <input
+            type="text"
+            name="search"
+            placeholder="Search brand or model"
+            value="<?= htmlspecialchars($search, ENT_QUOTES, 'UTF-8') ?>"
+        >
 
-    <select name="category">
-        <option value="">All categories</option>
+        <select name="category">
 
-        <?php foreach ($categories as $cat): ?>
-            <option value="<?= (int)$cat["id"] ?>"
-                <?= (string)$category === (string)$cat["id"] ? "selected" : "" ?>>
-                <?= htmlspecialchars($cat["name"]) ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
+            <option value="">All categories</option>
 
-    <input
-        type="number"
-        name="max_price"
-        min="0"
-        step="0.01"
-        placeholder="Max price (DH/day)"
-        value="<?= htmlspecialchars((string)$maxPrice) ?>"
-    >
+            <?php foreach ($categories as $cat): ?>
 
-    <button type="submit" class="btn">Search</button>
+                <option
+                    value="<?= (int)$cat["id"] ?>"
+                    <?= (string)$category === (string)$cat["id"] ? "selected" : "" ?>
+                >
+                    <?= htmlspecialchars($cat["name"], ENT_QUOTES, 'UTF-8') ?>
+                </option>
 
-    <a href="cars.php">Reset</a>
+            <?php endforeach; ?>
 
-</form>
+        </select>
 
+        <input
+            type="number"
+            name="max_price"
+            min="0"
+            step="0.01"
+            placeholder="Max price (DH/day)"
+            value="<?= htmlspecialchars((string)$maxPrice, ENT_QUOTES, 'UTF-8') ?>"
+        >
+
+        <button type="submit" class="btn">
+            Search
+        </button>
+
+        <a href="cars.php">Reset</a>
+
+    </form>
+
+    <!-- Cars catalogue -->
     <div class="cars-container">
-<?php foreach ($cars as $car): ?>
 
-    <div class="car-card">
+        <?php if (empty($cars)): ?>
 
-        <h2>
-            <?= htmlspecialchars($car["brand"]) ?>
-            <?= htmlspecialchars($car["model"]) ?>
-        </h2>
+            <p>No cars found.</p>
 
-        <p>
-            Category:
-            <?= htmlspecialchars($car["category_name"]) ?>
-        </p>
+        <?php else: ?>
 
-        <p>Year: <?= (int)$car["year"] ?></p>
+            <?php foreach ($cars as $car): ?>
 
-        <p>
-            <?= htmlspecialchars($car["description"] ?? "") ?>
-        </p>
+                <div class="car-card">
 
-        <p>
-            <strong>
-                <?= htmlspecialchars($car["price_per_day"]) ?> DH / day
-            </strong>
-        </p>
+                    <?php
+                    // Use the image stored in MySQL
+                    $imagePath = !empty($car["image"])
+                        ? $car["image"]
+                        : "assets/images/cars/default-car.jpg";
+                    ?>
 
-        <p>
-            Status:
-            <?= htmlspecialchars($car["status"]) ?>
-        </p>
+                    <!-- Car picture -->
+                    <img
+                        src="<?= htmlspecialchars($imagePath, ENT_QUOTES, 'UTF-8') ?>"
+                        alt="<?= htmlspecialchars($car["brand"] . " " . $car["model"], ENT_QUOTES, 'UTF-8') ?>"
+                        class="car-image"
+                        loading="lazy"
+                    >
 
-        <!-- Button to open car details -->
-        <a href="car-details.php?id=<?= (int)$car["id"] ?>"
-           class="btn">
-            View Details
-        </a>
+                    <h2>
+                        <?= htmlspecialchars($car["brand"], ENT_QUOTES, 'UTF-8') ?>
+                        <?= htmlspecialchars($car["model"], ENT_QUOTES, 'UTF-8') ?>
+                    </h2>
 
-    </div>
+                    <p>
+                        Category:
+                        <?= htmlspecialchars($car["category_name"], ENT_QUOTES, 'UTF-8') ?>
+                    </p>
 
-<?php endforeach; ?>
+                    <p>
+                        Year:
+                        <?= (int)$car["year"] ?>
+                    </p>
+
+                    <p>
+                        <?= htmlspecialchars($car["description"] ?? "", ENT_QUOTES, 'UTF-8') ?>
+                    </p>
+
+                    <p>
+                        <strong>
+                            <?= htmlspecialchars($car["price_per_day"], ENT_QUOTES, 'UTF-8') ?>
+                            DH / day
+                        </strong>
+                    </p>
+
+                    <p>
+                        Status:
+                        <?= htmlspecialchars($car["status"], ENT_QUOTES, 'UTF-8') ?>
+                    </p>
+
+                    <a
+                        href="car-details.php?id=<?= (int)$car["id"] ?>"
+                        class="btn"
+                    >
+                        View Details
+                    </a>
+
+                </div>
+
+            <?php endforeach; ?>
+
+        <?php endif; ?>
 
     </div>
 
