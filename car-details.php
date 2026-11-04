@@ -47,13 +47,27 @@ if (!$car) {
 <header>
     <div class="logo">CarRental</div>
     <nav>
+        <?php if (isset($_SESSION["user_id"])): ?>
+    <a href="my-reservations.php">My Reservations</a>
+<?php endif; ?>
         <a href="index.php">Home</a>
         <a href="cars.php">Cars</a>
     </nav>
 </header>
 
 <section class="car-details">
+<?php
+// Get the car image from MySQL
+$imagePath = !empty($car["image"])
+    ? $car["image"]
+    : "assets/images/cars/default-car.jpg";
+?>
 
+<img
+    src="<?= htmlspecialchars($imagePath, ENT_QUOTES, 'UTF-8') ?>"
+    alt="<?= htmlspecialchars($car["brand"] . " " . $car["model"], ENT_QUOTES, 'UTF-8') ?>"
+    class="detail-car-image"
+>
     <h1>
         <?= htmlspecialchars($car["brand"]) ?>
         <?= htmlspecialchars($car["model"]) ?>

@@ -27,7 +27,9 @@ require_once "config/database.php";
     </div>
 
     <nav>
-
+<?php if (isset($_SESSION["user_id"])): ?>
+    <a href="my-reservations.php">My Reservations</a>
+<?php endif; ?>
         <a href="index.php">Home</a>
 
         <?php if (isset($_SESSION["user_id"])): ?>

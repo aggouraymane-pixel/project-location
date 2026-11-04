@@ -163,4 +163,69 @@ nav a:hover {
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 15px;
+}.detail-car-image {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+@media (max-width: 768px) {
+    .detail-car-image {
+        height: 220px;
+    }
+
+    .car-details {
+        margin: 20px;
+        padding: 20px;
+    }
+}.reservations-section {
+    padding: 60px 8%;
+}
+
+.reservations-section h1 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: #1e3a8a;
+}
+
+.reservations-container {
+    display: grid;
+    gap: 20px;
+}
+
+.reservation-card {
+    display: flex;
+    gap: 25px;
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: white;
+}
+
+.reservation-image {
+    width: 240px;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.reservation-info h2 {
+    color: #1e3a8a;
+    margin-bottom: 15px;
+}
+
+.reservation-info p {
+    margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+    .reservation-card {
+        flex-direction: column;
+    }
+
+    .reservation-image {
+        width: 100%;
+    }
 }

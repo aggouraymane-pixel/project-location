@@ -78,9 +78,11 @@ $cars = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <a href="cars.php">Cars</a>
 
         <?php if (isset($_SESSION["user_id"])): ?>
+            <a href="my-reservations.php">My Reservations</a>
             <a href="logout.php">Logout</a>
         <?php else: ?>
             <a href="login.php">Login</a>
+            <a href="register.php">Register</a>
         <?php endif; ?>
     </nav>
 
@@ -148,7 +150,6 @@ $cars = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="car-card">
 
                     <?php
-                    // Use the image stored in MySQL
                     $imagePath = !empty($car["image"])
                         ? $car["image"]
                         : "assets/images/cars/default-car.jpg";
